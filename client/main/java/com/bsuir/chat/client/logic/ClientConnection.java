@@ -42,7 +42,7 @@ public class ClientConnection extends Thread {
                     socket.close();
                     break;
                 }
-                chatTextArea.setText(response + "\n");
+                chatTextArea.setText(chatTextArea.getText() + response + "\n");
             }
         } catch (IOException ignore) {
             //socket closed
