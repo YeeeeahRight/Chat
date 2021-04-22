@@ -27,7 +27,6 @@ public class ServerController {
     private Button endButton;
 
     private Server server;
-    private String serverExceptionMessage;
 
     @FXML
     void initialize() {
@@ -58,10 +57,6 @@ public class ServerController {
 
         endButton.setOnAction(event -> {
             if (server != null) {
-                if (serverExceptionMessage != null) {
-                    alertError(serverExceptionMessage);
-                    serverExceptionMessage = null;
-                }
                 try {
                     server.stopServer();
                 } catch (IOException e) {

@@ -5,6 +5,7 @@ import javafx.scene.control.TextArea;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 
 public class ClientConnection extends Thread {
@@ -44,8 +45,18 @@ public class ClientConnection extends Thread {
                 }
                 chatTextArea.setText(chatTextArea.getText() + response + "\n");
             }
-        } catch (IOException ignore) {
+        } catch (SocketException ignore) {
             //socket closed
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (!socket.isClosed()) {
+                try {
+                    disconnect();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
